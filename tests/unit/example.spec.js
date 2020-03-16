@@ -1,12 +1,13 @@
 import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import About from "../../src/views/About";
 
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
-    });
-    expect(wrapper.text()).toMatch(msg);
-  });
+const array = ["red", "blue", "green", "green"];
+const text1 = "red blue green and green";
+
+// Mount the component
+test("About", () => {
+  // render the component
+  const wrapper = shallowMount(About);
+
+  expect(wrapper.find('.rewriteText').(array, text1)).toEqual("foogreenbar");
 });

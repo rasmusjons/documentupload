@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "dev": "nodemon server/index.js",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

@@ -9,10 +9,24 @@
       @dragleave="dragging = false"
       @dragover="dragging = true"
     >
-      <p v-if="!success">Drag & Drop</p>
-      <b-spinner type="grow" label="Loading..." v-if="spinner"></b-spinner>
+      <p v-if="headline">Drag & Drop a document</p>
 
-      <p v-if="success">Uploading Done! Upload again?</p>
+      <transition name="fade" mode="out-in">
+        <p v-if="success">Uploading Done! Upload again?</p>
+        <div v-if="fail">
+          <p>File format is not recognized! Try again?</p>
+          <p>Supported formats are:</p>
+          <ul v-for="format in supportedFormats" :key="format.index">
+            <li>{{ format }}</li>
+          </ul>
+        </div>
+      </transition>
+      <b-spinner
+        class="spinner"
+        type="grow"
+        label="Loading..."
+        v-if="spinner"
+      ></b-spinner>
     </div>
   </div>
 </template>
@@ -25,9 +39,11 @@ export default {
     return {
       file: "",
       dragging: false,
+      headline: true,
       success: false,
       fail: false,
-      spinner: false
+      spinner: false,
+      supportedFormats: ["rtf", "txt", "md", "file", "doc", "docx"]
     };
   },
 
@@ -53,9 +69,15 @@ export default {
         );
         this.spinner = false;
         this.success = true;
+        this.fail = false;
+        this.headline = false;
         console.log("SUCCESS!!", response);
       } catch (e) {
         console.log(e);
+        this.success = false;
+        this.fail = true;
+        this.headline = false;
+        this.spinner = false;
       }
     },
 
@@ -70,7 +92,13 @@ export default {
 </script>
 
 <style>
+.spinner {
+  display: inline;
+}
 .dropZone {
+  min-height: 200px;
+  width: 70%;
+  margin: auto;
   background: mistyrose;
   border-radius: 4px;
   padding: 20px;
@@ -90,5 +118,24 @@ export default {
 
 p {
   text-align: center;
+}
+
+li {
+  list-style-type: none;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: opacity 0.2s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  transition: opacity 0.2s;
 }
 </style>

@@ -1,0 +1,126 @@
+<template>
+  <div>
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col cols="12">
+          <b-spinner type="grow" label="Loading..." v-if="spinner"></b-spinner>
+
+          <h5 v-if="infoActive.state === true">
+            The text has {{ infoActive.amount }} words that occur the same
+            amount of times
+          </h5>
+          <p>{{ textComputed }}</p>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+export default {
+  async created() {
+    try {
+      const response = await axios.get("http://localhost:3000/documents");
+      console.log(response);
+      this.originalText = response.data;
+      let string = response.data;
+
+      if (string.length === 0) {
+        this.spinner = false;
+        this.text = "File is empty :(";
+        return;
+      }
+
+      //cleans up text inorder to find most frequent word
+      const cleanString = this.stringCleaner(string);
+      const arrayOfWords = cleanString.split(" ");
+      const cleanArrayOfWords = arrayOfWords.filter(word => word != "");
+
+      this.findMostFrequent(cleanArrayOfWords);
+      this.rewriteText();
+
+      this.spinner = false;
+    } catch (e) {
+      console.log(e.error);
+    }
+  },
+  data() {
+    return {
+      infoActive: { state: false, amount: 0 },
+      text: "",
+      array: "",
+      spinner: true,
+      highestCount: [],
+      originalText: ""
+    };
+  },
+  methods: {
+    rewriteText() {
+      if (this.highestCount.length === 1) {
+        this.text = this.originalText.replace(
+          new RegExp("\\b" + this.highestCount[0] + "\\b", "gi"),
+          " foo" + this.highestCount[0] + "bar "
+        );
+      } else {
+        this.infoActive = { state: true, amount: this.highestCount.length };
+
+        this.text = this.originalText;
+        this.highestCount.forEach(word => {
+          this.text = this.text.replace(
+            new RegExp("\\b" + word + "\\b", "gi"),
+            " foo" + word + "bar "
+          );
+        });
+      }
+      //   if (this.highestCount.length === 1) {
+      //     this.text = text.replace(
+      //       new RegExp("\\b" + this.highestCount[0] + "\\b", "gi"),
+      //       " foo" + array[0] + "bar "
+      //     );
+      //   } else {
+      //     this.infoActive = { state: true, amount: array.length };
+
+      //     this.text = text;
+      //     this.highestCount.forEach(word => {
+      //       this.text = this.text.replace(
+      //         new RegExp("\\b" + word + "\\b", "gi"),
+      //         " foo" + word + "bar "
+      //       );
+      //     });
+      //   }
+    },
+    findMostFrequent(array) {
+      let singleWordCount = {};
+      let maxCount = 1;
+      for (var i = 0; i < array.length; i++) {
+        var word = array[i];
+
+        if (singleWordCount[word] == null) {
+          singleWordCount[word] = 1;
+        } else singleWordCount[word]++;
+
+        if (singleWordCount[word] > maxCount) {
+          this.highestCount = [word];
+          maxCount = singleWordCount[word];
+        } else if (singleWordCount[word] == maxCount) {
+          this.highestCount.push(word);
+          maxCount = singleWordCount[word];
+        }
+      }
+    },
+    stringCleaner(string) {
+      return (string = string
+        .replace(/ {1}|\r\n|\n|\r/gm, " ") //radbrytnigar whitespace tar jag nedan i array
+        .replace(/_ /g, "") //underscore med mellanrum
+        .replace(/[\W_]/g, " ") //alla tecken
+        .toLowerCase());
+    }
+  },
+  computed: {
+    textComputed() {
+      return this.text;
+    }
+  }
+};
+</script>
