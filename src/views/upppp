@@ -1,0 +1,19 @@
+
+
+
+<template>
+  <div class="container">
+    <div class="dropbox">
+      <label
+        >File
+        <input
+          type="file"
+          id="file"
+          ref="file"
+          v-on:change="handleFileUpload()"
+        />
+      </label>
+      <button v-on:click="submitFile()">Submit</button>
+    </div>
+  </div>
+</template>

@@ -1,17 +1,13 @@
 <template>
-  <div class="container">
-    <div class="large-12 medium-12 small-12 cell">
-      <label
-        >File
-        <input
-          type="file"
-          id="file"
-          ref="file"
-          v-on:change="handleFileUpload()"
-        />
-      </label>
-      <button v-on:click="submitFile()">Submit</button>
-    </div>
+  <div
+    class="dropZone"
+    :class="{ draggClass: dragging }"
+    @dragover.prevent
+    @drop.stop.prevent="onDrop"
+    @dragenter="dragging = true"
+    @dragleave="dragging = false"
+  >
+    <p>Drag & Drop</p>
   </div>
 </template>
 
@@ -19,28 +15,22 @@
 import axios from "axios";
 
 export default {
-  /*
-      Defines the data used by the component
-    */
   data() {
     return {
-      file: ""
+      file: "",
+      dragging: false
     };
   },
 
   methods: {
-    /*
-        Submits the file to the server
-      */
-    submitFile() {
-      /*
-                Initialize the form data
-            */
-      let formData = new FormData();
+    drag() {
+      console.log(this.dragging);
+    },
+    onDrop(event) {
+      this.file = event.dataTransfer.files[0];
 
-      /*
-                Add the form data we need to submit
-            */
+      const formData = new FormData();
+
       formData.append("document", this.file);
 
       /*
@@ -69,3 +59,22 @@ export default {
   }
 };
 </script>
+
+<style>
+.dropZone {
+  background: goldenrod;
+  border-radius: 4px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+.draggClass {
+  background: mistyrose;
+  border-radius: 4px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+
+p {
+  text-align: center;
+}
+</style>

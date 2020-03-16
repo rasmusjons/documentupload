@@ -57,7 +57,7 @@ export default {
       if (highestCount.length === 1) {
         this.text = untampered.replace(
           new RegExp("\\b" + highestCount[0] + "\\b", "gi"),
-          " foo " + highestCount[0] + " bar "
+          " foo" + highestCount[0] + "bar "
         );
       } else {
         this.infoActive = { state: true, amount: highestCount.length };
@@ -66,7 +66,7 @@ export default {
         highestCount.forEach(word => {
           this.text = this.text.replace(
             new RegExp("\\b" + word + "\\b", "gi"),
-            " foo " + word + " bar "
+            " foo" + word + "bar "
           );
         });
       }
