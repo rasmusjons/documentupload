@@ -4,10 +4,12 @@
     :class="{ draggClass: dragging }"
     @dragover.prevent
     @drop.stop.prevent="onDrop"
-    @dragenter="dragging = true"
+    @drop="dragging = false"
     @dragleave="dragging = false"
+    @dragover="dragging = true"
   >
     <p>Drag & Drop</p>
+    <p v-if="success">Uploading Done!</p>
   </div>
 </template>
 
@@ -18,7 +20,9 @@ export default {
   data() {
     return {
       file: "",
-      dragging: false
+      dragging: false,
+      success: false,
+      fail: false
     };
   },
 
@@ -26,28 +30,26 @@ export default {
     drag() {
       console.log(this.dragging);
     },
-    onDrop(event) {
+    async onDrop(event) {
       this.file = event.dataTransfer.files[0];
-
       const formData = new FormData();
-
       formData.append("document", this.file);
 
-      /*
-          Make the request to the POST /single-file URL
-        */
-      axios
-        .post("http://localhost:3000/documents", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/documents",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
           }
-        })
-        .then(function() {
-          console.log("SUCCESS!!");
-        })
-        .catch(function() {
-          console.log("FAILURE!!");
-        });
+        );
+        this.success = true;
+        console.log("SUCCESS!!", response);
+      } catch (e) {
+        console.log(e);
+      }
     },
 
     /*
@@ -62,16 +64,21 @@ export default {
 
 <style>
 .dropZone {
-  background: goldenrod;
-  border-radius: 4px;
-  padding: 20px;
-  transition: all 0.2s;
-}
-.draggClass {
   background: mistyrose;
   border-radius: 4px;
   padding: 20px;
   transition: all 0.2s;
+  outline: 2px dashed black;
+  outline-offset: -5px;
+}
+.draggClass {
+  background-color: white;
+
+  border-radius: 4px;
+  padding: 20px;
+  transition: all 0.2s;
+  outline: 2px dashed black;
+  outline-offset: -10px;
 }
 
 p {
