@@ -33,6 +33,7 @@
 
 <script>
 import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -50,6 +51,9 @@ export default {
   methods: {
     drag() {
       console.log(this.dragging);
+    },
+    send() {
+      this.$root.$emit("mess");
     },
     async onDrop(event) {
       this.spinner = true;
@@ -71,6 +75,8 @@ export default {
         this.success = true;
         this.fail = false;
         this.headline = false;
+        this.send();
+        this.getDocument();
         console.log("SUCCESS!!", response);
       } catch (e) {
         console.log(e);
@@ -84,9 +90,8 @@ export default {
     /*
         Handles a change on the file upload
       */
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0];
-    }
+
+    ...mapActions(["getDocument"])
   }
 };
 </script>

@@ -3,13 +3,17 @@
     <b-container class="bv-example-row">
       <b-row>
         <b-col cols="12">
-          <b-spinner type="grow" label="Loading..." v-if="spinner"></b-spinner>
+          <b-spinner
+            type="grow"
+            label="Loading..."
+            v-if="spinnerStore"
+          ></b-spinner>
 
-          <h5 v-if="infoActive.state === true">
-            The text has {{ infoActive.amount }} words that occur the same
+          <h5 v-if="infoActiveStore.state === true">
+            The text has {{ infoActiveStore.amount }} words that occur the same
             amount of times
           </h5>
-          <p>{{ textComputed }}</p>
+          <p>{{ textStore }}</p>
         </b-col>
       </b-row>
     </b-container>
@@ -17,45 +21,46 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
 export default {
-  async created() {
-    try {
-      const response = await axios.get("http://localhost:3000/documents");
-      console.log(response);
-      this.originalText = response.data;
-      let string = response.data;
+  mounted() {
+    this.getDocument();
 
-      if (string.length === 0) {
-        this.spinner = false;
-        this.text = "File is empty :(";
-        return;
-      }
-
-      //cleans up text inorder to find most frequent word
-      const cleanString = this.stringCleaner(string);
-      const arrayOfWords = cleanString.split(" ");
-      const cleanArrayOfWords = arrayOfWords.filter(word => word != "");
-
-      this.findMostFrequent(cleanArrayOfWords);
-      this.rewriteText();
-
-      this.spinner = false;
-    } catch (e) {
-      console.log(e.error);
-    }
+    // try {
+    //   const response = await axios.get("http://localhost:3000/documents");
+    //   console.log(response);
+    //   this.originalText = response.data;
+    //   string = response.data;
+    //   if (string.length === 0) {
+    //     this.spinner = false;
+    //     this.text = "File is empty :(";
+    //     return;
+    //   }
+    // } catch (e) {
+    //   console.log(e.error);
+    // }
+    // let string = this.getDocument();
+    // //cleans up text inorder to find most frequent word
+    // const cleanString = this.stringCleaner(string);
+    // const arrayOfWords = cleanString.split(" ");
+    // const cleanArrayOfWords = arrayOfWords.filter(word => word != "");
+    // this.findMostFrequent(cleanArrayOfWords);
+    // this.rewriteText();
+    // this.spinner = false;
   },
   data() {
     return {
-      infoActive: { state: false, amount: 0 },
-      text: "",
-      array: "",
-      spinner: true,
-      highestCount: [],
-      originalText: ""
+      // infoActive: { state: false, amount: 0 },
+      // text: "",
+      // array: "",
+      spinner: true
+      // highestCount: [],
+      // originalText: ""
     };
   },
   methods: {
+    ...mapActions(["getDocument"]),
+
     rewriteText() {
       if (this.highestCount.length === 1) {
         this.text = this.originalText.replace(
@@ -120,7 +125,18 @@ export default {
   computed: {
     textComputed() {
       return this.text;
+    },
+    textStore() {
+      return this.$store.getters.text;
+    },
+    spinnerStore() {
+      return this.$store.getters.spinner;
+    },
+    infoActiveStore() {
+      return this.$store.getters.infoActive;
     }
   }
 };
 </script>
+
+<style></style>
