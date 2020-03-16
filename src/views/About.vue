@@ -1,5 +1,7 @@
 <template>
   <div>
+    <b-spinner type="grow" label="Loading..." v-if="spinner"></b-spinner>
+
     <h5 v-if="infoActive.state === true">
       The text has {{ infoActive.amount }} words that occur the same amount of
       times
@@ -70,6 +72,7 @@ export default {
           );
         });
       }
+      this.spinner = false;
     } catch (e) {
       console.log(e);
     }
@@ -78,7 +81,8 @@ export default {
     return {
       infoActive: { state: false, amount: 0 },
       text: "",
-      array: ""
+      array: "",
+      spinner: true
     };
   }
 };

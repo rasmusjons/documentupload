@@ -1,15 +1,19 @@
 <template>
-  <div
-    class="dropZone"
-    :class="{ draggClass: dragging }"
-    @dragover.prevent
-    @drop.stop.prevent="onDrop"
-    @drop="dragging = false"
-    @dragleave="dragging = false"
-    @dragover="dragging = true"
-  >
-    <p>Drag & Drop</p>
-    <p v-if="success">Uploading Done!</p>
+  <div>
+    <div
+      class="dropZone"
+      :class="{ draggClass: dragging }"
+      @dragover.prevent
+      @drop.stop.prevent="onDrop"
+      @drop="dragging = false"
+      @dragleave="dragging = false"
+      @dragover="dragging = true"
+    >
+      <p v-if="!success">Drag & Drop</p>
+      <b-spinner type="grow" label="Loading..." v-if="spinner"></b-spinner>
+
+      <p v-if="success">Uploading Done! Upload again?</p>
+    </div>
   </div>
 </template>
 
@@ -22,7 +26,8 @@ export default {
       file: "",
       dragging: false,
       success: false,
-      fail: false
+      fail: false,
+      spinner: false
     };
   },
 
@@ -31,6 +36,7 @@ export default {
       console.log(this.dragging);
     },
     async onDrop(event) {
+      this.spinner = true;
       this.file = event.dataTransfer.files[0];
       const formData = new FormData();
       formData.append("document", this.file);
@@ -45,6 +51,7 @@ export default {
             }
           }
         );
+        this.spinner = false;
         this.success = true;
         console.log("SUCCESS!!", response);
       } catch (e) {
