@@ -9,7 +9,16 @@
       @dragleave="dragging = false"
       @dragover="dragging = true"
     >
-      <p v-if="headline">Drag & Drop a document</p>
+      <input class="fileupLoad" type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
+      <label class="filepLoadLabel" for="file">
+        <span v-if="headline">
+          <b-icon-upload></b-icon-upload>
+
+          <span>Choose a file</span>
+          {{ " " }}
+          <span>or drag it here.</span>
+        </span>
+      </label>
 
       <transition name="fade" mode="out-in">
         <p v-if="success">Uploading Done! Upload again?</p>
@@ -21,12 +30,7 @@
           </ul>
         </div>
       </transition>
-      <b-spinner
-        class="spinner"
-        type="grow"
-        label="Loading..."
-        v-if="spinner"
-      ></b-spinner>
+      <b-spinner class="spinner" type="grow" label="Loading..." v-if="spinner"></b-spinner>
     </div>
   </div>
 </template>
@@ -49,15 +53,10 @@ export default {
   },
 
   methods: {
-    drag() {
-      console.log(this.dragging);
-    },
-    send() {
-      this.$root.$emit("mess");
-    },
-    async onDrop(event) {
+    async upload(refs) {
+      this.file = refs;
       this.spinner = true;
-      this.file = event.dataTransfer.files[0];
+
       const formData = new FormData();
       formData.append("document", this.file);
 
@@ -75,7 +74,7 @@ export default {
         this.success = true;
         this.fail = false;
         this.headline = false;
-        this.send();
+
         this.getDocument();
         console.log("SUCCESS!!", response);
       } catch (e) {
@@ -86,25 +85,55 @@ export default {
         this.spinner = false;
       }
     },
+    async handleFileUpload() {
+      this.upload(this.$refs.file.files[0]);
+    },
+    drag() {
+      console.log(this.dragging);
+    },
 
-    /*
-        Handles a change on the file upload
-      */
-
+    async onDrop(event) {
+      this.upload(event.dataTransfer.files[0]);
+    },
     ...mapActions(["getDocument"])
   }
 };
 </script>
 
 <style>
+.b-icon.bi {
+  display: block !important;
+  margin: auto;
+  width: 70px;
+  height: 70px;
+}
 .spinner {
   display: inline;
 }
+
+.fileupLoad {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.filepLoadLabel {
+  padding-top: 40px;
+  width: 100%;
+  height: 210px;
+  position: left;
+  cursor: pointer;
+  z-index: -1;
+}
+
 .dropZone {
   min-height: 200px;
   width: 70%;
   margin: auto;
-  background: mistyrose;
+  background: #bedce0;
   border-radius: 4px;
   padding: 20px;
   transition: all 0.2s;
@@ -113,7 +142,6 @@ export default {
 }
 .draggClass {
   background-color: white;
-
   border-radius: 4px;
   padding: 20px;
   transition: all 0.2s;
