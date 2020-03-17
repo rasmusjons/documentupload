@@ -1,4 +1,4 @@
-const stringCleaner = string => {
+function stringCleaner(string) {
   console.log("strin", string);
   const newString = string
     .replace(/ {1}|\r\n|\n|\r/gm, " ") //radbrytnigar whitespace tar jag nedan i array
@@ -7,7 +7,7 @@ const stringCleaner = string => {
     .toLowerCase();
 
   return newString;
-};
+}
 //cleans up text inorder to find most frequent word
 /* const cleanString = this.state.string
            .replace(/ {1}|\r\n|\n|\r/gm, " ") //radbrytnigar whitespace tar jag nedan i array
@@ -17,9 +17,13 @@ const stringCleaner = string => {
   
           */
 
-const arrayCleaner = string => {
+const arrayCreator = string => {
   const arrayOfWords = string.split(" ");
-  const cleanArrayOfWords = arrayOfWords.filter(word => word != "");
+  return arrayOfWords;
+};
+
+const arrayCleaner = array => {
+  const cleanArrayOfWords = array.filter(word => word != "");
   return cleanArrayOfWords;
 };
 
@@ -64,4 +68,6 @@ const wordCounter = array => {
 //   }
 // }
 
-export { stringCleaner, arrayCleaner, wordCounter };
+module.exports = { stringCleaner, arrayCreator, arrayCleaner, wordCounter };
+
+// export { stringCleaner, arrayCleaner, wordCounter };

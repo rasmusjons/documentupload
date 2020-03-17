@@ -1,7 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import { stringCleaner, arrayCleaner, wordCounter } from "./helpers";
+import {
+  stringCleaner,
+  arrayCreator,
+  arrayCleaner,
+  wordCounter
+} from "./helpers";
 
 Vue.use(Vuex);
 
@@ -36,7 +41,8 @@ export default new Vuex.Store({
       }
 
       const cleanString = stringCleaner(this.state.string);
-      const cleanArrayOfWords = arrayCleaner(cleanString);
+      const arrayOfWords = arrayCreator(cleanString);
+      const cleanArrayOfWords = arrayCleaner(arrayOfWords);
       const highestCount = wordCounter(cleanArrayOfWords);
 
       //The function below updates state.
