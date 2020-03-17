@@ -19,7 +19,7 @@ const upload = multer({
     fileSize: 10000000
   },
   fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(rtf|txt|md|file|doc|docx)$/)) {
+    if (!file.originalname.match(/\.(rtf|txt|md|file|doc|docx|pdf)$/)) {
       return cb(new Error("Please upload a txt"));
     }
     cb(undefined, true);
