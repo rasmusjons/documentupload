@@ -1,8 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Upload from "../views/Upload.vue";
-import Displayfile from "../views/DisplayFile.vue";
+import About from "../views/About.vue";
 
 Vue.use(VueRouter);
 
@@ -13,15 +12,9 @@ const routes = [
     component: Home
   },
   {
-    path: "/upload",
-    name: "Upload",
-    component: Upload
-  },
-
-  {
-    path: "/displayfile",
-    name: "Displayfile",
-    component: Displayfile
+    path: "/About",
+    name: "About",
+    component: About
   }
 ];
 

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import UploadVue from "./Upload.vue";
-import DisplayFileVue from "./DisplayFile.vue";
+import UploadVue from "../components/Upload";
+import DisplayFileVue from "../components/DisplayFile.vue";
 
 export default {
   name: "Home",

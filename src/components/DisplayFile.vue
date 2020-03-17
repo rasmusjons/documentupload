@@ -3,11 +3,13 @@
     <b-container class="bv-example-row">
       <b-row>
         <b-col cols="12">
-          <b-spinner
-            type="grow"
-            label="Loading..."
-            v-if="spinnerStore"
-          ></b-spinner>
+          <button class="btn btn-info" @click="toogleCase(), getDocument()">
+            Ignore case?
+            <span v-if="caseCheck === true">Yes!</span>
+            <span v-else>No</span>
+          </button>
+          <hr />
+          <b-spinner type="grow" label="Loading..." v-if="spinnerStore"></b-spinner>
 
           <h5 v-if="infoActiveStore.state === true">
             The text has {{ infoActiveStore.amount }} words that occur the same
@@ -24,7 +26,7 @@
 import { mapActions } from "vuex";
 export default {
   mounted() {
-    this.getDocument();
+    this.getDocument(this.checked);
 
     // try {
     //   const response = await axios.get("http://localhost:3000/documents");
@@ -50,6 +52,7 @@ export default {
   },
   data() {
     return {
+      checked: true,
       // infoActive: { state: false, amount: 0 },
       // text: "",
       // array: "",
@@ -59,7 +62,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getDocument"]),
+    ...mapActions(["getDocument", "toogleCase"]),
 
     rewriteText() {
       if (this.highestCount.length === 1) {
@@ -134,6 +137,9 @@ export default {
     },
     infoActiveStore() {
       return this.$store.getters.infoActive;
+    },
+    caseCheck() {
+      return this.$store.getters.caseChecked;
     }
   }
 };

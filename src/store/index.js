@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import {
   stringCleaner,
+  stringCleanerKeepUpperCase,
   arrayCreator,
   arrayCleaner,
   wordCounter
@@ -17,10 +18,11 @@ export default new Vuex.Store({
     originalText: "",
     highestCount: [],
     spinner: false,
-    infoActive: { state: false, amount: 0 }
+    infoActive: { state: false, amount: 0 },
+    caseChecked: true
   },
   mutations: {
-    async get_Document() {
+    async GET_DOCUMENT() {
       this.state.spinner = true;
       try {
         const response = await axios.get("http://localhost:3000/documents");
@@ -39,8 +41,12 @@ export default new Vuex.Store({
       } catch (e) {
         console.log(e.error);
       }
-
-      const cleanString = stringCleaner(this.state.string);
+      console.log(this.state.caseChecked);
+      const cleanString =
+        this.state.caseChecked === true
+          ? stringCleanerKeepUpperCase(this.state.string)
+          : stringCleaner(this.state.string);
+      // const cleanString = stringCleaner(this.state.string);
       const arrayOfWords = arrayCreator(cleanString);
       const cleanArrayOfWords = arrayCleaner(arrayOfWords);
       const highestCount = wordCounter(cleanArrayOfWords);
@@ -54,10 +60,13 @@ export default new Vuex.Store({
             state: false,
             amount: 1
           };
+
           this.state.text = this.state.originalText.replace(
             new RegExp("\\b" + highestCount[0] + "\\b", "gi"),
             " foo" + highestCount[0] + "bar "
           );
+          console.log(this.state.originalText);
+          console.log(this.state.text);
         } else {
           this.state.infoActive = {
             state: true,
@@ -75,16 +84,21 @@ export default new Vuex.Store({
       })();
 
       this.state.spinner = false;
+    },
+    TOGGLE_CASE() {
+      console.log(this.state.caseChecked);
+
+      this.state.caseChecked = !this.state.caseChecked;
+      console.log(this.state.caseChecked);
     }
   },
   actions: {
     getDocument: ({ commit }) => {
-      console.log("action get DOC");
-      commit("get_Document");
+      commit("GET_DOCUMENT");
     },
-    getStringCleaner: ({ commit }) => {
-      console.log("action get srtingC");
-      commit("string_Cleaner");
+    toogleCase: ({ commit }) => {
+      console.log("action");
+      commit("TOGGLE_CASE");
     }
   },
   getters: {
@@ -96,6 +110,9 @@ export default new Vuex.Store({
     },
     infoActive: state => {
       return state.infoActive;
+    },
+    caseChecked: state => {
+      return state.caseChecked;
     }
   }
 });

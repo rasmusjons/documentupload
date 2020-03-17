@@ -1,21 +1,19 @@
-function stringCleaner(string) {
-  console.log("strin", string);
+const stringCleaner = string => {
   const newString = string
-    .replace(/ {1}|\r\n|\n|\r/gm, " ") //radbrytnigar whitespace tar jag nedan i array
-    .replace(/_ /g, "") //underscore med mellanrum
-    .replace(/[\W_]/g, " ") //alla tecken
+    .replace(/ {1}|\r\n|\n|\r/gm, " ")
+    .replace(/_ /g, "")
+    .replace(/[\W_]/g, " ")
     .toLowerCase();
 
   return newString;
-}
-//cleans up text inorder to find most frequent word
-/* const cleanString = this.state.string
-           .replace(/ {1}|\r\n|\n|\r/gm, " ") //radbrytnigar whitespace tar jag nedan i array
-           .replace(/_ /g, "") //underscore med mellanrum
-           .replace(/[\W_]/g, " ") //alla tecken
-          .toLowerCase();
-  
-          */
+};
+const stringCleanerKeepUpperCase = string => {
+  const newString = string
+    .replace(/ {1}|\r\n|\n|\r/gm, " ")
+    .replace(/_ /g, "")
+    .replace(/[\W_]/g, " ");
+  return newString;
+};
 
 const arrayCreator = string => {
   const arrayOfWords = string.split(" ");
@@ -49,25 +47,11 @@ const wordCounter = array => {
   }
   return highestCount;
 };
-//WORD COUNTER
-// let singleWordCount = {};
-// let maxCount = 1;
-// for (var i = 0; i < cleanArrayOfWords.length; i++) {
-//   var word = cleanArrayOfWords[i];
 
-//   if (singleWordCount[word] == null) {
-//     singleWordCount[word] = 1;
-//   } else singleWordCount[word]++;
-
-//   if (singleWordCount[word] > maxCount) {
-//     this.state.highestCount = [word];
-//     maxCount = singleWordCount[word];
-//   } else if (singleWordCount[word] == maxCount) {
-//     this.state.highestCount.push(word);
-//     maxCount = singleWordCount[word];
-//   }
-// }
-
-module.exports = { stringCleaner, arrayCreator, arrayCleaner, wordCounter };
-
-// export { stringCleaner, arrayCleaner, wordCounter };
+module.exports = {
+  stringCleaner,
+  stringCleanerKeepUpperCase,
+  arrayCreator,
+  arrayCleaner,
+  wordCounter
+};

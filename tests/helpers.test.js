@@ -1,12 +1,13 @@
 /* eslint-disable */
 import {
   stringCleaner,
+  stringCleanerKeepUpperCase,
   arrayCreator,
   arrayCleaner,
   wordCounter
 } from "../src/store/helpers";
 
-test("cleans string from linebreaks", () => {
+test("cleans string from special characters and linebreaks", () => {
   expect(stringCleaner("lower case string")).toBe("lower case string");
   expect(stringCleaner("lower. case. string")).toBe("lower  case  string");
   expect(stringCleaner("lower? case!#€% string")).toBe(
@@ -17,6 +18,21 @@ test("cleans string from linebreaks", () => {
   );
   expect(stringCleaner("Upper \n Case \n string")).toBe(
     "upper   case   string"
+  );
+});
+
+test("cleans string from special characters and linebreaks but keeps uppercase", () => {
+  expect(stringCleanerKeepUpperCase("Upper Case String")).toBe(
+    "Upper Case String"
+  );
+  expect(stringCleanerKeepUpperCase("UPPER. Case. String")).toBe(
+    "UPPER  Case  String"
+  );
+  expect(stringCleanerKeepUpperCase("UPPEr? case!#€% string")).toBe(
+    "UPPEr  case     string"
+  );
+  expect(stringCleanerKeepUpperCase("Upper \n Case \n string")).toBe(
+    "Upper   Case   string"
   );
 });
 
@@ -59,4 +75,7 @@ test("calculates the most common word or words in an array of strings. Returns a
     "chimpanzee",
     "ape"
   ]);
+  expect(
+    wordCounter(["MONKEY", "MONkey", "Monkey", "ape", "ape"])
+  ).toStrictEqual(["ape"]);
 });
