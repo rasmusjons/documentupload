@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import { stringCleaner, arrayCleaner, wordCounter } from "./helpers";
 
 Vue.use(Vuex);
 
@@ -23,66 +24,50 @@ export default new Vuex.Store({
 
         if (this.state.string.length === 0) {
           this.state.spinner = false;
+          this.state.infoActive = {
+            state: false,
+            amount: null
+          };
           this.state.text = "File is empty :(";
           return;
         }
       } catch (e) {
         console.log(e.error);
       }
-      //cleans up text inorder to find most frequent word
-      const cleanString = this.state.string
-        .replace(/ {1}|\r\n|\n|\r/gm, " ") //radbrytnigar whitespace tar jag nedan i array
-        .replace(/_ /g, "") //underscore med mellanrum
-        .replace(/[\W_]/g, " ") //alla tecken
-        .toLowerCase();
 
-      const arrayOfWords = cleanString.split(" ");
-      const cleanArrayOfWords = arrayOfWords.filter(word => word != "");
+      const cleanString = stringCleaner(this.state.string);
+      const cleanArrayOfWords = arrayCleaner(cleanString);
+      const highestCount = wordCounter(cleanArrayOfWords);
 
-      //WORD COUNTER
-      let singleWordCount = {};
-      let maxCount = 1;
-      for (var i = 0; i < cleanArrayOfWords.length; i++) {
-        var word = cleanArrayOfWords[i];
-
-        if (singleWordCount[word] == null) {
-          singleWordCount[word] = 1;
-        } else singleWordCount[word]++;
-
-        if (singleWordCount[word] > maxCount) {
-          this.state.highestCount = [word];
-          maxCount = singleWordCount[word];
-        } else if (singleWordCount[word] == maxCount) {
-          this.state.highestCount.push(word);
-          maxCount = singleWordCount[word];
-        }
-      }
-
-      //WORD REPLER
-
-      if (this.state.highestCount.length === 1) {
-        this.state.infoActive = {
-          state: false,
-          amount: 1
-        };
-        this.state.text = this.state.originalText.replace(
-          new RegExp("\\b" + this.state.highestCount[0] + "\\b", "gi"),
-          " foo" + this.state.highestCount[0] + "bar "
-        );
-      } else {
-        this.state.infoActive = {
-          state: true,
-          amount: this.state.highestCount.length
-        };
-
-        this.state.text = this.state.originalText;
-        this.state.highestCount.forEach(word => {
-          this.state.text = this.state.text.replace(
-            new RegExp("\\b" + word + "\\b", "gi"),
-            " foo" + word + "bar "
+      //The function below updates state.
+      //1. I chose to make it an IFFE instead of breaking it out because it is so linked to state-management and has a low reusability.
+      //2. I personally prefer a named function for readability but in this situation an anonymous arrow function binds this in a preferred way.
+      (() => {
+        if (highestCount.length === 1) {
+          this.state.infoActive = {
+            state: false,
+            amount: 1
+          };
+          this.state.text = this.state.originalText.replace(
+            new RegExp("\\b" + highestCount[0] + "\\b", "gi"),
+            " foo" + highestCount[0] + "bar "
           );
-        });
-      }
+        } else {
+          this.state.infoActive = {
+            state: true,
+            amount: highestCount.length
+          };
+
+          this.state.text = this.state.originalText;
+          highestCount.forEach(word => {
+            this.state.text = this.state.text.replace(
+              new RegExp("\\b" + word + "\\b", "gi"),
+              " foo" + word + "bar "
+            );
+          });
+        }
+      })();
+
       this.state.spinner = false;
     }
   },
