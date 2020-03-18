@@ -13,14 +13,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    string: "",
+    responseString: "",
     text: "",
     originalText: "",
-    highestCount: [],
     spinner: false,
     infoActive: { state: false, amount: 0 },
     caseChecked: true,
-    stats: { word: "", amount: 0 }
+    stats: { word: "", amount: 0 },
+    fileUploadedStatus: false
   },
   mutations: {
     async GET_DOCUMENT() {
@@ -28,9 +28,9 @@ export default new Vuex.Store({
       try {
         const response = await axios.get("http://localhost:3000/documents");
         this.state.originalText = response.data;
-        this.state.string = response.data;
+        this.state.responseString = response.data;
 
-        if (this.state.string.length === 0) {
+        if (this.state.responseString.length === 0) {
           this.state.spinner = false;
           this.state.infoActive = {
             state: false,
@@ -45,16 +45,14 @@ export default new Vuex.Store({
       console.log(this.state.caseChecked);
       const cleanString =
         this.state.caseChecked === true
-          ? stringCleanerKeepUpperCase(this.state.string)
-          : stringCleaner(this.state.string);
-      // const cleanString = stringCleaner(this.state.string);
+          ? stringCleanerKeepUpperCase(this.state.responseString)
+          : stringCleaner(this.state.responseString);
       const arrayOfWords = arrayCreator(cleanString);
       const cleanArrayOfWords = arrayCleaner(arrayOfWords);
       const highestCount = wordCounter(cleanArrayOfWords);
       this.state.stats = highestCount;
 
       const words = highestCount.word;
-      console.log(highestCount);
 
       //The function below updates state.
       //1. I chose to make it an IFFE instead of breaking it out because it is so linked to state-management and has a low reusability.
@@ -87,6 +85,7 @@ export default new Vuex.Store({
       })();
 
       this.state.spinner = false;
+      this.state.fileUploadedStatus = true;
     },
     TOGGLE_CASE() {
       this.state.caseChecked = !this.state.caseChecked;
@@ -116,6 +115,9 @@ export default new Vuex.Store({
     },
     getStats: state => {
       return state.stats;
+    },
+    getFileUploadedStatus: state => {
+      return state.fileUploadedStatus;
     }
   }
 });

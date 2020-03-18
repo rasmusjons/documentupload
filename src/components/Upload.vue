@@ -61,7 +61,7 @@ export default {
       success: false,
       fail: false,
       spinner: false,
-      supportedFormats: ["rtf", "txt", "md", "file", "doc", "docx"]
+      supportedFormats: ["rtf", "txt", "md", "file"]
     };
   },
 
