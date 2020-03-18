@@ -14,6 +14,8 @@
   text-align: center;
   color: #2c3e50;
   background-color: #f2f2f2;
+  min-height: 1000px;
+  height: 100%;
 }
 
 #nav {

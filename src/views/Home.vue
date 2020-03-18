@@ -2,6 +2,7 @@
   <div>
     <app-up-load></app-up-load>
     <app-display-file></app-display-file>
+    <br />
   </div>
 </template>
 
