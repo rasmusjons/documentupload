@@ -19,7 +19,8 @@ export default new Vuex.Store({
     highestCount: [],
     spinner: false,
     infoActive: { state: false, amount: 0 },
-    caseChecked: true
+    caseChecked: true,
+    stats: { word: "", amount: 0 }
   },
   mutations: {
     async GET_DOCUMENT() {
@@ -50,31 +51,33 @@ export default new Vuex.Store({
       const arrayOfWords = arrayCreator(cleanString);
       const cleanArrayOfWords = arrayCleaner(arrayOfWords);
       const highestCount = wordCounter(cleanArrayOfWords);
+      this.state.stats = highestCount;
+
+      const words = highestCount.word;
+      console.log(highestCount);
 
       //The function below updates state.
       //1. I chose to make it an IFFE instead of breaking it out because it is so linked to state-management and has a low reusability.
       //2. I personally prefer a named function for readability but in this situation an anonymous arrow function binds this in a preferred way.
       (() => {
-        if (highestCount.length === 1) {
+        if (words.length === 1) {
           this.state.infoActive = {
             state: false,
             amount: 1
           };
 
           this.state.text = this.state.originalText.replace(
-            new RegExp("\\b" + highestCount[0] + "\\b", "gi"),
-            " foo" + highestCount[0] + "bar "
+            new RegExp("\\b" + words[0] + "\\b", "gi"),
+            " foo" + words[0] + "bar "
           );
-          console.log(this.state.originalText);
-          console.log(this.state.text);
         } else {
           this.state.infoActive = {
             state: true,
-            amount: highestCount.length
+            amount: words.length
           };
 
           this.state.text = this.state.originalText;
-          highestCount.forEach(word => {
+          words.forEach(word => {
             this.state.text = this.state.text.replace(
               new RegExp("\\b" + word + "\\b", "gi"),
               " foo" + word + "bar "
@@ -86,10 +89,7 @@ export default new Vuex.Store({
       this.state.spinner = false;
     },
     TOGGLE_CASE() {
-      console.log(this.state.caseChecked);
-
       this.state.caseChecked = !this.state.caseChecked;
-      console.log(this.state.caseChecked);
     }
   },
   actions: {
@@ -113,6 +113,9 @@ export default new Vuex.Store({
     },
     caseChecked: state => {
       return state.caseChecked;
+    },
+    getStats: state => {
+      return state.stats;
     }
   }
 });

@@ -1,37 +1,50 @@
 <template>
   <div>
-    <div
-      class="dropZone"
-      :class="{ draggClass: dragging }"
-      @dragover.prevent
-      @drop.stop.prevent="onDrop"
-      @drop="dragging = false"
-      @dragleave="dragging = false"
-      @dragover="dragging = true"
-    >
-      <input class="fileupLoad" type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-      <label class="filepLoadLabel" for="file">
-        <span v-if="headline">
-          <b-icon-upload></b-icon-upload>
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col cols="12">
+          <div
+            class="dropZone"
+            :class="{ draggClass: dragging }"
+            @dragover.prevent
+            @drop.stop.prevent="onDrop"
+            @drop="dragging = false"
+            @dragleave="dragging = false"
+            @dragover="dragging = true"
+          >
+            <input
+              class="fileupLoad"
+              type="file"
+              id="file"
+              ref="file"
+              v-on:change="handleFileUpload()"
+            />
+            <label class="filepLoadLabel" for="file">
+              <span v-if="headline">
+                <b-icon-upload></b-icon-upload>
 
-          <span>Choose a file</span>
-          {{ " " }}
-          <span>or drag it here.</span>
-        </span>
-      </label>
-
-      <transition name="fade" mode="out-in">
-        <p v-if="success">Uploading Done! Upload again?</p>
-        <div v-if="fail">
-          <p>File format is not recognized! Try again?</p>
-          <p>Supported formats are:</p>
-          <ul v-for="format in supportedFormats" :key="format.index">
-            <li>{{ format }}</li>
-          </ul>
-        </div>
-      </transition>
-      <b-spinner class="spinner" type="grow" label="Loading..." v-if="spinner"></b-spinner>
-    </div>
+                <span class="bold">Choose a file</span>
+                {{ " " }}
+                <span>or drag it here.</span>
+              </span>
+              <transition name="fade" mode="out-in">
+                <p v-if="success">
+                  <span class="bold">Done!</span> Upload new document?
+                </p>
+                <div v-if="fail">
+                  <p>File format is not recognized! Try again?</p>
+                  <p>Supported formats are:</p>
+                  <ul v-for="format in supportedFormats" :key="format.index">
+                    <li>{{ format }}</li>
+                  </ul>
+                </div>
+              </transition>
+              <b-spinner class="spinner" type="grow" label="Loading..." v-if="spinner"></b-spinner>
+            </label>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -101,6 +114,10 @@ export default {
 </script>
 
 <style>
+.bold {
+  font-weight: bold;
+}
+
 .b-icon.bi {
   display: block !important;
   margin: auto;
@@ -108,7 +125,7 @@ export default {
   height: 70px;
 }
 .spinner {
-  display: inline;
+  display: inline-block;
 }
 
 .fileupLoad {
@@ -130,6 +147,7 @@ export default {
 }
 
 .dropZone {
+  color: #034a4a;
   min-height: 200px;
   width: 70%;
   margin: auto;
@@ -137,7 +155,7 @@ export default {
   border-radius: 4px;
   padding: 20px;
   transition: all 0.2s;
-  outline: 2px dashed black;
+  outline: 2px dashed #034a4a9c;
   outline-offset: -5px;
 }
 .draggClass {

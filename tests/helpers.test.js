@@ -64,18 +64,23 @@ test("cleans array from empty strings", () => {
 });
 
 test("calculates the most common word or words in an array of strings. Returns an array of string/strings", () => {
-  expect(wordCounter(["monkey", "monkey", "monkey"])).toStrictEqual(["monkey"]);
-  expect(wordCounter(["monkey", "monkey", "ape"])).toStrictEqual(["monkey"]);
-  expect(wordCounter(["monkey", "monkey", "ape", "ape"])).toStrictEqual([
-    "monkey",
-    "ape"
-  ]);
-  expect(wordCounter(["monkey", "chimpanzee", "ape"])).toStrictEqual([
-    "monkey",
-    "chimpanzee",
-    "ape"
-  ]);
+  expect(wordCounter(["monkey", "monkey", "monkey"])).toStrictEqual({
+    maxCount: 3,
+    word: ["monkey"]
+  });
+  expect(wordCounter(["monkey", "monkey", "ape"])).toStrictEqual({
+    maxCount: 2,
+    word: ["monkey"]
+  });
+  expect(wordCounter(["monkey", "monkey", "ape", "ape"])).toStrictEqual({
+    maxCount: 2,
+    word: ["monkey", "ape"]
+  });
+  expect(wordCounter(["monkey", "chimpanzee", "ape"])).toStrictEqual({
+    maxCount: 1,
+    word: ["monkey", "chimpanzee", "ape"]
+  });
   expect(
     wordCounter(["MONKEY", "MONkey", "Monkey", "ape", "ape"])
-  ).toStrictEqual(["ape"]);
+  ).toStrictEqual({ maxCount: 2, word: ["ape"] });
 });

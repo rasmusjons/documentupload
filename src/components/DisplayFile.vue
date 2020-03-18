@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="bv-example-row">
+    <b-container>
       <b-row>
         <b-col cols="12">
           <button class="btn btn-info" @click="toogleCase(), getDocument()">
@@ -9,13 +9,39 @@
             <span v-else>No</span>
           </button>
           <hr />
-          <b-spinner type="grow" label="Loading..." v-if="spinnerStore"></b-spinner>
 
+          <div v-if="!spinnerStore && stats.word.length <= 1">
+            <h4>
+              The most common word is
+              <span class="mostCommon">{{ stats.word[0] }}</span> which occur
+              <span class="mostCommon">{{ stats.maxCount }}</span> times
+            </h4>
+          </div>
+          <div v-if="!spinnerStore && stats.word.length > 1">
+            <h4>
+              The most common words are
+              <span
+                class="mostCommon"
+                v-for="word in stats.word"
+                :key="word.index"
+              >
+                {{ word }}
+                {{ " " }}
+              </span>
+              which occur
+              <span class="mostCommon">{{ stats.maxCount }}</span>
+              times
+            </h4>
+          </div>
           <h5 v-if="infoActiveStore.state === true">
             The text has {{ infoActiveStore.amount }} words that occur the same
             amount of times
           </h5>
-          <p>{{ textStore }}</p>
+          <div class="textContainer">
+            <b-spinner type="grow" label="Loading..." v-if="spinnerStore"></b-spinner>
+
+            <p>{{ textStore }}</p>
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -56,7 +82,8 @@ export default {
       // infoActive: { state: false, amount: 0 },
       // text: "",
       // array: "",
-      spinner: true
+      spinner: true,
+      statsFromStore: {}
       // highestCount: [],
       // originalText: ""
     };
@@ -140,9 +167,34 @@ export default {
     },
     caseCheck() {
       return this.$store.getters.caseChecked;
+    },
+    stats() {
+      return this.$store.getters.getStats;
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+h4 {
+  padding: 15px;
+}
+
+.btn-info {
+  margin-top: 30px;
+  opacity: 0.7;
+}
+
+.mostCommon {
+  font-weight: 900;
+}
+
+.textContainer {
+  background-color: white;
+  border-radius: 2px;
+  padding: 40px;
+  -webkit-box-shadow: 1px 3px 21px -6px rgba(176, 176, 176, 1);
+  -moz-box-shadow: 1px 3px 21px -6px rgba(176, 176, 176, 1);
+  box-shadow: 1px 3px 21px -6px rgba(176, 176, 176, 1);
+}
+</style>

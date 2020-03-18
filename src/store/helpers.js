@@ -41,11 +41,11 @@ const wordCounter = array => {
       highestCount = [word];
       maxCount = singleWordCount[word];
     } else if (singleWordCount[word] == maxCount) {
-      highestCount.push(word);
       maxCount = singleWordCount[word];
+      highestCount.push(word);
     }
   }
-  return highestCount;
+  return { word: highestCount, maxCount };
 };
 
 module.exports = {
