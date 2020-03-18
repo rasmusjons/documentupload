@@ -52,8 +52,7 @@
 import { mapActions } from "vuex";
 export default {
   mounted() {
-    this.getDocument(this.checked);
-
+    // this.getDocument(this.checked);
     // try {
     //   const response = await axios.get("http://localhost:3000/documents");
     //   console.log(response);
@@ -191,6 +190,8 @@ h4 {
 
 .textContainer {
   background-color: white;
+  margin: auto;
+  width: 70%;
   border-radius: 2px;
   padding: 40px;
   -webkit-box-shadow: 1px 3px 21px -6px rgba(176, 176, 176, 1);
