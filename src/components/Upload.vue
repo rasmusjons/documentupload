@@ -39,7 +39,9 @@
                   </ul>
                 </div>
               </transition>
-              <b-spinner class="spinner" type="grow" label="Loading..." v-if="spinner"></b-spinner>
+              <div class="spinner">
+                <b-spinner type="grow" label="Loading..." v-if="spinner"></b-spinner>
+              </div>
             </label>
           </div>
         </b-col>
@@ -125,7 +127,7 @@ export default {
   height: 70px;
 }
 .spinner {
-  display: inline-block;
+  display: block;
 }
 
 .fileupLoad {

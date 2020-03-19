@@ -1,6 +1,7 @@
 <template>
   <div>
     <app-up-load></app-up-load>
+
     <app-display-file></app-display-file>
     <br />
   </div>
@@ -18,3 +19,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.relax {
+  width: 100px;
+}
+</style>

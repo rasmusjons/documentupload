@@ -15,6 +15,7 @@
           <!-- Text-container headline for 1 word-->
           <div v-if="!spinnerStore && stats.word.length <= 1">
             <h4 v-if="!fileUploadedStatus">Your text will be shown below after upload</h4>
+
             <h4 v-else>
               The most common word is
               <span class="mostCommon">{{ stats.word[0] }}</span> which occur
