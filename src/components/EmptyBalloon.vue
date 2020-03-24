@@ -72,7 +72,7 @@
 <style>
 #cloudRight {
   animation: shift1 6s ease-in-out alternate;
-  animation-iteration-count: 2;
+  animation-iteration-count: 4;
 }
 
 @keyframes shift1 {
@@ -87,7 +87,7 @@
 
 #cloudLeft {
   animation: shift2 16s ease-in-out alternate;
-  animation-iteration-count: 1;
+  animation-iteration-count: 2;
 }
 
 @keyframes shift2 {

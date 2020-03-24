@@ -11,11 +11,14 @@
 </template>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
 #app {
-  font-family: Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
-  background-color: #f2f2f2;
+  background: rgb(250, 250, 250);
+  font-family: "Montserrat", sans-serif, Arial;
+  font-display: swap;
   min-height: 1000px;
   height: 100%;
 }

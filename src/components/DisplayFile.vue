@@ -54,7 +54,7 @@
                 word.
               </p>
             </div>
-            <p>{{ textStore }}</p>
+            <p class="textUploaded">{{ textStore }}</p>
           </div>
         </b-col>
       </b-row>
@@ -112,6 +112,7 @@ export default {
 .btn-info {
   margin-top: 30px;
   opacity: 0.7;
+  background-color: #6abbc9;
 }
 
 .textContainerHeadline,
@@ -141,6 +142,10 @@ span {
 .textContainerHeadline,
 h4 {
   padding: 15px;
+}
+.textUploaded {
+  font-family: "Geneva";
+  text-align: left;
 }
 
 .balloon {
