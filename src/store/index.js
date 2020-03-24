@@ -20,7 +20,8 @@ export default new Vuex.Store({
     infoActive: { state: false, amount: 0 },
     caseChecked: true,
     stats: { word: "", amount: 0 },
-    fileUploadedStatus: false
+    fileUploadedStatus: false,
+    emptyFile: false
   },
   mutations: {
     async GET_DOCUMENT() {
@@ -36,7 +37,8 @@ export default new Vuex.Store({
             state: false,
             amount: null
           };
-          this.state.text = "File is empty :(";
+          this.state.text = "File is empty";
+          this.state.emptyFile = true;
           return;
         }
       } catch (e) {
@@ -84,6 +86,7 @@ export default new Vuex.Store({
         }
       })();
 
+      this.state.emptyFile = false;
       this.state.spinner = false;
       this.state.fileUploadedStatus = true;
     },
@@ -118,6 +121,9 @@ export default new Vuex.Store({
     },
     getFileUploadedStatus: state => {
       return state.fileUploadedStatus;
+    },
+    getEmptyFile: state => {
+      return state.emptyFile;
     }
   }
 });

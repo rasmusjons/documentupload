@@ -13,6 +13,7 @@
     >
       <circle style="fill:#6ABAC9;" cx="254.644" cy="254.644" r="254.644" />
       <path
+        id="cloudLeft"
         style="fill:#FCFCFD;"
         d="M176.996,256c-2.374-24.413-22.718-43.062-47.47-43.062c-18.988,0-35.264,11.189-43.062,27.126
 	c-2.034-1.017-4.069-1.695-6.442-1.695c-7.121,0-13.224,5.764-13.224,13.224c0,1.695,0.339,3.052,1.017,4.747
@@ -42,6 +43,7 @@
 	h26.448c5.086,0,9.155-3.391,10.172-8.477l5.764-30.177L293.298,379.423z"
       />
       <path
+        id="cloudRight"
         style="fill:#FFFFFF;"
         d="M449.271,196.323c-2.373-24.413-22.718-43.062-47.47-43.062c-18.988,0-35.264,11.189-43.062,27.126
 	c-2.034-1.017-4.069-1.695-6.442-1.695c-7.121,0-13.224,5.764-13.224,13.224c0,1.695,0.339,3.052,1.017,4.747
@@ -67,4 +69,34 @@
   </div>
 </template>
 
-<style></style>
+<style>
+#cloudRight {
+  animation: shift1 6s ease-in-out alternate;
+  animation-iteration-count: 2;
+}
+
+@keyframes shift1 {
+  0% {
+    transform: translate3d(px, 0px, 0px);
+  }
+
+  100% {
+    transform: translate3d(10px, 0px, 0px);
+  }
+}
+
+#cloudLeft {
+  animation: shift2 16s ease-in-out alternate;
+  animation-iteration-count: 1;
+}
+
+@keyframes shift2 {
+  0% {
+    transform: translate3d(px, 0px, 0px);
+  }
+
+  100% {
+    transform: translate3d(-10px, 0px, 0px);
+  }
+}
+</style>

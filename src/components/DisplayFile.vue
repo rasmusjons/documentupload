@@ -16,7 +16,7 @@
           <div v-if="!spinnerStore && stats.word.length <= 1">
             <h4 v-if="!fileUploadedStatus">Your text will be shown below after upload</h4>
 
-            <h4 v-else>
+            <h4 v-if="fileUploadedStatus && !emptyFileStatus">
               The most common word is
               <span class="mostCommon">{{ stats.word[0] }}</span> which occur
               <span class="mostCommon">{{ stats.maxCount }}</span> times
@@ -24,8 +24,10 @@
           </div>
 
           <!-- Text-container headlines for 2 or more words-->
+          <p>{{ emptyFileStatus }}</p>
+
           <div class="textContainerHeadline" v-if="!spinnerStore && stats.word.length > 1">
-            <h4>
+            <h4 v-if="!emptyFileStatus">
               The most common words are
               <span v-for="word in stats.word" :key="word.index">
                 {{ word }}
@@ -43,15 +45,16 @@
 
           <!-- Text-container-->
           <div class="textContainer">
-            <div>
-              <strong>No text to show</strong>
+            <b-spinner type="grow" label="Loading..." v-if="spinnerStore"></b-spinner>
+
+            <div v-if="!fileUploadedStatus">
+              <strong>No file is uploaded</strong>
               <app-empty-balloon class="balloon"></app-empty-balloon>
               <p>
-                Please upload file above to display text and fidn most common
-                word or words.
+                Please upload file above to display text and find most common
+                word.
               </p>
             </div>
-            <b-spinner type="grow" label="Loading..." v-if="spinnerStore"></b-spinner>
             <p>{{ textStore }}</p>
           </div>
         </b-col>
@@ -95,6 +98,9 @@ export default {
     },
     fileUploadedStatus() {
       return this.$store.getters.getFileUploadedStatus;
+    },
+    emptyFileStatus() {
+      return this.$store.getters.getEmptyFile;
     }
   },
   components: {
@@ -141,5 +147,6 @@ span {
 .balloon {
   margin: auto;
   width: 30%;
+  padding: 10px;
 }
 </style>
