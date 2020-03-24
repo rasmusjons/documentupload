@@ -24,7 +24,6 @@
           </div>
 
           <!-- Text-container headlines for 2 or more words-->
-          <p>{{ emptyFileStatus }}</p>
 
           <div class="textContainerHeadline" v-if="!spinnerStore && stats.word.length > 1">
             <h4 v-if="!emptyFileStatus">
@@ -110,11 +109,6 @@ export default {
 </script>
 
 <style>
-.textContainerHeadline,
-h4 {
-  padding: 15px;
-}
-
 .btn-info {
   margin-top: 30px;
   opacity: 0.7;
@@ -142,6 +136,11 @@ span {
   );
   mask-position: -1.5rem -1.5rem;
   mask-repeat: repeat;
+}
+
+.textContainerHeadline,
+h4 {
+  padding: 15px;
 }
 
 .balloon {

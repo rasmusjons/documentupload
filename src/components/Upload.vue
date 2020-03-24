@@ -5,7 +5,7 @@
         <b-col cols="12">
           <div
             class="dropZone"
-            :class="{ draggClass: dragging }"
+            :class="{ draggEffect: dragging }"
             @dragover.prevent
             @drop.stop.prevent="onDrop"
             @drop="dragging = false"
@@ -13,7 +13,7 @@
             @dragover="dragging = true"
           >
             <input
-              class="fileupLoad"
+              class="hiddenFileupLoad"
               type="file"
               id="file"
               ref="file"
@@ -34,9 +34,11 @@
                 <div v-if="fail">
                   <p>File format is not recognized! Try again?</p>
                   <p>Supported formats are:</p>
-                  <ul v-for="format in supportedFormats" :key="format.index">
-                    <li>{{ format }}</li>
-                  </ul>
+                  <p
+                    class="supportedFormats"
+                    v-for="format in supportedFormats"
+                    :key="format.index"
+                  >{{ format }} {{ " " }}</p>
                 </div>
               </transition>
               <div class="spinner">
@@ -116,38 +118,6 @@ export default {
 </script>
 
 <style>
-.bold {
-  font-weight: bold;
-}
-
-.b-icon.bi {
-  display: block !important;
-  margin: auto;
-  width: 70px;
-  height: 70px;
-}
-.spinner {
-  display: block;
-}
-
-.fileupLoad {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-.filepLoadLabel {
-  padding-top: 40px;
-  width: 100%;
-  height: 210px;
-  position: left;
-  cursor: pointer;
-  z-index: -1;
-}
-
 .dropZone {
   color: #034a4a;
   min-height: 200px;
@@ -159,8 +129,28 @@ export default {
   transition: all 0.2s;
   outline: 2px dashed #034a4a9c;
   outline-offset: -5px;
+  text-align: center;
 }
-.draggClass {
+
+.filepLoadLabel {
+  padding-top: 40px;
+  width: 100%;
+  height: 210px;
+  position: left;
+  cursor: pointer;
+  z-index: -1;
+}
+
+.hiddenFileupLoad {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.draggEffect {
   background-color: white;
   border-radius: 4px;
   padding: 20px;
@@ -169,14 +159,30 @@ export default {
   outline-offset: -10px;
 }
 
-p {
-  text-align: center;
+/* Text styling */
+label .bold {
+  font-weight: bold;
 }
 
-li {
-  list-style-type: none;
+.supportedFormats {
+  display: inline;
+  font-weight: 900;
 }
 
+/* intray icon/image */
+.b-icon.bi {
+  display: block !important;
+  margin: auto;
+  width: 70px;
+  height: 70px;
+}
+
+/* loading spinner */
+.spinner {
+  display: block;
+}
+
+/* Animation */
 .fade-enter {
   opacity: 0;
 }

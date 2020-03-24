@@ -35,6 +35,7 @@
   color: #6abac9;
 }
 
+/* routering transisiton */
 .fade-enter {
   opacity: 0;
 }
