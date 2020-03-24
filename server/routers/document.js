@@ -19,7 +19,7 @@ const upload = multer({
     fileSize: 10000000
   },
   fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(rtf|txt|md|file|doc|docx|pdf)$/)) {
+    if (!file.originalname.match(/\.(rtf|txt|md|file)$/)) {
       return cb(new Error("Please upload a txt"));
     }
     cb(undefined, true);
@@ -41,6 +41,7 @@ router.post(
       file: req.file.buffer
     });
 
+    console.log("dock");
     try {
       await document.save();
       res.status(201).send({ document });

@@ -2,15 +2,15 @@
   <div>
     <h5>This app was made using Vue, Node and Express</h5>
     <p>Please enjoy the sunrise &#9996;</p>
-    <app-svg></app-svg>
+    <app-about-balloon></app-about-balloon>
   </div>
 </template>
 
 <script>
-import SvgVue from "../components/Svg.vue";
+import AboutBalloon from "../components/AboutBalloon.vue";
 export default {
   components: {
-    appSvg: SvgVue
+    appAboutBalloon: AboutBalloon
   }
 };
 </script>

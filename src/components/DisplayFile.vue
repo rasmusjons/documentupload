@@ -43,6 +43,14 @@
 
           <!-- Text-container-->
           <div class="textContainer">
+            <div>
+              <strong>No text to show</strong>
+              <app-empty-balloon class="balloon"></app-empty-balloon>
+              <p>
+                Please upload file above to display text and fidn most common
+                word or words.
+              </p>
+            </div>
             <b-spinner type="grow" label="Loading..." v-if="spinnerStore"></b-spinner>
             <p>{{ textStore }}</p>
           </div>
@@ -54,6 +62,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import EmptyBalloon from "./EmptyBalloon";
 export default {
   data() {
     return {
@@ -87,6 +96,9 @@ export default {
     fileUploadedStatus() {
       return this.$store.getters.getFileUploadedStatus;
     }
+  },
+  components: {
+    appEmptyBalloon: EmptyBalloon
   }
 };
 </script>
@@ -117,5 +129,17 @@ span {
   -webkit-box-shadow: 1px 3px 21px -6px rgba(176, 176, 176, 1);
   -moz-box-shadow: 1px 3px 21px -6px rgba(176, 176, 176, 1);
   box-shadow: 1px 3px 21px -6px rgba(176, 176, 176, 1);
+  mask-image: radial-gradient(
+    circle at 1.5rem 1.5rem,
+    transparent 1.5rem,
+    gold 0
+  );
+  mask-position: -1.5rem -1.5rem;
+  mask-repeat: repeat;
+}
+
+.balloon {
+  margin: auto;
+  width: 30%;
 }
 </style>
