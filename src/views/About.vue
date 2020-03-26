@@ -8,6 +8,7 @@
 
 <script>
 import AboutBalloon from "../components/AboutBalloon.vue";
+
 export default {
   components: {
     appAboutBalloon: AboutBalloon

@@ -25,6 +25,8 @@ const arrayCleaner = array => {
   return cleanArrayOfWords;
 };
 
+// Takes an array of words and iterates over the words in the array, increasing the singleWordCount if a word reoccurs
+// Returns an object with an array of most frequent word/s and a numerical maxCount.
 const wordCounter = array => {
   let singleWordCount = {};
   let maxCount = 1;

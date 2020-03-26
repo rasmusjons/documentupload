@@ -3,6 +3,7 @@
     <b-container class="bv-example-row">
       <b-row>
         <b-col cols="12">
+          <!-- Dropzone -->
           <div
             class="dropZone"
             :class="{ draggEffect: dragging }"
@@ -12,6 +13,7 @@
             @dragleave="dragging = false"
             @dragover="dragging = true"
           >
+            <!-- Hidden clickable file upload input -->
             <input
               class="hiddenFileupLoad"
               type="file"
@@ -19,14 +21,17 @@
               ref="file"
               v-on:change="handleFileUpload()"
             />
+
+            <!-- Welcome message in drop-zone -->
             <label class="filepLoadLabel" for="file">
               <span v-if="headline">
                 <b-icon-upload></b-icon-upload>
-
                 <span class="bold">Choose a file</span>
                 {{ " " }}
                 <span>or drag it here.</span>
               </span>
+
+              <!-- Result message in dropzone -->
               <transition name="fade" mode="out-in">
                 <p v-if="success">
                   <span class="bold">Done!</span> Upload new document?
@@ -41,6 +46,8 @@
                   >{{ format }} {{ " " }}</p>
                 </div>
               </transition>
+
+              <!-- Loader. Displayed while loading -->
               <div class="spinner">
                 <b-spinner type="grow" label="Loading..." v-if="spinner"></b-spinner>
               </div>
@@ -87,28 +94,27 @@ export default {
             }
           }
         );
-        this.spinner = false;
-        this.success = true;
         this.fail = false;
         this.headline = false;
+        this.spinner = false;
+        this.success = true;
 
         this.getDocument();
         console.log("SUCCESS!!", response);
       } catch (e) {
         console.log(e);
-        this.success = false;
         this.fail = true;
         this.headline = false;
+        this.success = false;
         this.spinner = false;
       }
     },
     async handleFileUpload() {
       this.upload(this.$refs.file.files[0]);
     },
-    drag() {
-      console.log(this.dragging);
-    },
-
+    // drag() {
+    //   console.log(this.dragging);
+    // },
     async onDrop(event) {
       this.upload(event.dataTransfer.files[0]);
     },

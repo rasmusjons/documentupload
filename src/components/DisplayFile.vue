@@ -24,7 +24,6 @@
           </div>
 
           <!-- Text-container headlines for 2 or more words-->
-
           <div class="textContainerHeadline" v-if="!spinnerStore && stats.word.length > 1">
             <h4 v-if="!emptyFileStatus">
               The most common words are
@@ -109,12 +108,14 @@ export default {
 </script>
 
 <style>
+/*  Buttons */
 .btn-info {
   margin-top: 30px;
   opacity: 0.7;
   background-color: #6abbc9;
 }
 
+/*  Text-container */
 .textContainerHeadline,
 span {
   font-weight: 900;
@@ -143,11 +144,14 @@ span {
 h4 {
   padding: 15px;
 }
+
+/* Text-conatiner font for faster rendering */
 .textUploaded {
   font-family: "Geneva";
   text-align: left;
 }
 
+/* Image before upload */
 .balloon {
   margin: auto;
   width: 30%;

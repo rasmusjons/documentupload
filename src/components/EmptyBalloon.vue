@@ -70,6 +70,7 @@
 </template>
 
 <style>
+/*  Animations */
 #cloudRight {
   animation: shift1 6s ease-in-out alternate;
   animation-iteration-count: 4;
@@ -79,7 +80,6 @@
   0% {
     transform: translate3d(px, 0px, 0px);
   }
-
   100% {
     transform: translate3d(10px, 0px, 0px);
   }
@@ -94,7 +94,6 @@
   0% {
     transform: translate3d(px, 0px, 0px);
   }
-
   100% {
     transform: translate3d(-10px, 0px, 0px);
   }

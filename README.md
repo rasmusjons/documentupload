@@ -1,15 +1,18 @@
 # hiq
 
-## Project setup
+## Installation Instructions
 
 ```
-npm install
+Run "npm install"
 ```
 
-### Compiles and hot-reloads for development
+### Start App
 
 ```
-npm run serve
+Start local vue server with "npm run serve"
+Start node with "npm run dev"
+STARTA MONGODB???
+"
 ```
 
 ### Compiles and minifies for production
@@ -31,6 +34,22 @@ npm run lint
 ```
 
 ### Customize configuration
+
+### Technologies and Packages Used
+
+Node.js
+Express.js
+Vue.js
+Axios
+Bootstrap
+MongoDB
+Mongoose
+Vue-router
+Vuex
+
+### Discussion of technologies used
+
+I chose to work with Vue, Node and Express because they are techonlogies I am familiar with. Because time was limited and my ability to judge how much time needed for the assignment
 
 ### FAQ
 

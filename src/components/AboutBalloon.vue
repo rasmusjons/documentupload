@@ -551,6 +551,7 @@ export default {};
   background-size: 100% 100%;
 }
 
+/*  Animations  */
 #cloud1 {
   animation: shift1 6s ease-in-out forwards;
 }
@@ -559,7 +560,6 @@ export default {};
   0% {
     transform: translate3d(px, 0px, 0px);
   }
-
   100% {
     transform: translate3d(-70px, 0px, 0px);
   }
@@ -573,7 +573,6 @@ export default {};
   0% {
     transform: translate3d(0px, 0px, 0px);
   }
-
   100% {
     transform: translate3d(240px, 0px, 0px);
   }
@@ -587,7 +586,6 @@ export default {};
   0% {
     transform: translate3d(0px, 0px, 0px);
   }
-
   100% {
     transform: translate3d(-500px, 0px, 0px);
   }
@@ -601,7 +599,6 @@ export default {};
   0% {
     transform: translate3d(0px, 400px, 0px);
   }
-
   100% {
     transform: translate3d(0px, 0px, 0px);
   }
@@ -616,7 +613,6 @@ export default {};
   0% {
     transform: translate3d(-15px, 0px, 0px);
   }
-
   100% {
     transform: translate3d(15px, 0px, 0px);
   }

@@ -44,7 +44,6 @@ export default new Vuex.Store({
       } catch (e) {
         console.log(e.error);
       }
-      console.log(this.state.caseChecked);
       const cleanString =
         this.state.caseChecked === true
           ? stringCleanerKeepUpperCase(this.state.responseString)
