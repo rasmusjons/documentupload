@@ -7,7 +7,7 @@ import {
   wordCounter
 } from "../src/store/helpers";
 
-test("Cleans string from special characters and linebreaks", () => {
+test("Cleans string from special characters and line breaks", () => {
   expect(stringCleaner("lower case string")).toBe("lower case string");
   expect(stringCleaner("lower. case. string")).toBe("lower  case  string");
   expect(stringCleaner("lower? case!#€% string")).toBe(
@@ -21,7 +21,7 @@ test("Cleans string from special characters and linebreaks", () => {
   );
 });
 
-test("Cleans string from special characters and linebreaks but keeps uppercase", () => {
+test("Cleans string from special characters and line breaks but keeps uppercase", () => {
   expect(stringCleanerKeepUpperCase("Upper Case String")).toBe(
     "Upper Case String"
   );
@@ -38,18 +38,18 @@ test("Cleans string from special characters and linebreaks but keeps uppercase",
 
 test("Creates array from string", () => {
   expect(arrayCreator("string")).toStrictEqual(["string"]);
-  expect(arrayCreator("string with mutiple words")).toStrictEqual([
+  expect(arrayCreator("string with multiple words")).toStrictEqual([
     "string",
     "with",
-    "mutiple",
+    "multiple",
     "words"
   ]);
-  expect(arrayCreator(" string  with mutiple  words")).toStrictEqual([
+  expect(arrayCreator(" string  with multiple  words")).toStrictEqual([
     "",
     "string",
     "",
     "with",
-    "mutiple",
+    "multiple",
     "",
     "words"
   ]);

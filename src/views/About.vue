@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="about">
     <h5>This app was made using Vue, Node and Express</h5>
     <p>Please enjoy the sunrise &#9996;</p>
     <app-about-balloon></app-about-balloon>
@@ -15,4 +15,3 @@ export default {
   }
 };
 </script>
-<style></style>

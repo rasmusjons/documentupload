@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="12">
           <!-- Ignore Case button -->
-          <button class="btn btn-info" @click="toogleCase(), getDocument()">
+          <button class="btn btn-info" @click="toggleCase(), getDocument()">
             Ignore case?
             <span v-if="caseCheck === true">Yes!</span>
             <span v-else>No</span>
@@ -73,7 +73,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getDocument", "toogleCase"])
+    ...mapActions(["getDocument", "toggleCase"])
   },
   computed: {
     textComputed() {

@@ -4,8 +4,8 @@ import axios from "axios";
 import {
   stringCleaner,
   stringCleanerKeepUpperCase,
-  arrayCreator,
-  arrayCleaner,
+  createArray,
+  sanitizeEmptyValues,
   wordCounter
 } from "./helpers";
 
@@ -31,6 +31,10 @@ export default new Vuex.Store({
         this.state.originalText = response.data;
         this.state.responseString = response.data;
 
+        if (this.state.responseString.length === undefined) {
+          throw new Error("Text length is undefined");
+        }
+
         if (this.state.responseString.length === 0) {
           this.state.spinner = false;
           this.state.infoActive = {
@@ -48,12 +52,12 @@ export default new Vuex.Store({
         this.state.caseChecked === true
           ? stringCleanerKeepUpperCase(this.state.responseString)
           : stringCleaner(this.state.responseString);
-      const arrayOfWords = arrayCreator(cleanString);
-      const cleanArrayOfWords = arrayCleaner(arrayOfWords);
-      const highestCount = wordCounter(cleanArrayOfWords);
-      this.state.stats = highestCount;
+      const arrayOfWords = createArray(cleanString);
+      const cleanArrayOfWords = sanitizeEmptyValues(arrayOfWords);
+      const wordCount = wordCounter(cleanArrayOfWords);
+      this.state.stats = wordCount;
 
-      const words = highestCount.word;
+      const words = wordCount.word;
 
       //The function below updates state.
       //1. I chose to make it an IFFE instead of breaking it out because it is so linked to state-management and has a low reusability.
@@ -76,11 +80,14 @@ export default new Vuex.Store({
           };
 
           this.state.text = this.state.originalText;
+
           words.forEach(word => {
-            this.state.text = this.state.text.replace(
-              new RegExp("\\b" + word + "\\b", "gi"),
-              " foo" + word + "bar "
-            );
+            this.state.text = {
+              ...this.state.text.replace(
+                new RegExp("\\b" + word + "\\b", "gi"),
+                " foo" + word + "bar "
+              )
+            };
           });
         }
       })();
@@ -97,7 +104,7 @@ export default new Vuex.Store({
     getDocument: ({ commit }) => {
       commit("GET_DOCUMENT");
     },
-    toogleCase: ({ commit }) => {
+    toggleCase: ({ commit }) => {
       console.log("action");
       commit("TOGGLE_CASE");
     }

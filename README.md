@@ -12,29 +12,29 @@ npm install
 
 ### Start App
 
-Start local vue server with
+Start local Vue server with
 
 ```bash
 npm run serve
 ```
 
-Start node with
+Start Node with
 
 ```bash
-npm run dev
+npm run prod
 ```
 
 Navigate to app in [browser](http://localhost:3000)
 http://localhost:3000
 
-The app runs on an remote database to ensure a swift installation process. To change to local database and faster queries, see FAQ below.
+The app runs on an remote database to ensure a swift installation process. To change to local database, see FAQ below.
 
 Enjoy!
 
 ### Ship for production
 
 **WARNING!**
-This is an app written for test purposes. dev.env and README.md are not ignored by git. Both files handle sensitive information such as password.
+This is an app written for test purposes. prod.env is not ignored by git. The file handle sensitive information such as password.
 
 To minimize and compile for production run
 
@@ -82,11 +82,15 @@ to generate the scaffolding for this app.
 
 ### FAQ
 
-#### Local server setup for faster queries.
+#### Local server setup.
 
-Database queries might be slow with the remote databse.
-Go to Config > "dev.env".
-Change the MONGODB_URL to:
+Start Node with
+
+```bash
+npm run dev
+```
+
+This will change the MONGODB_URL to:
 
 ```bash
 mongodb://127.0.0.1:27017/documents-api
@@ -95,6 +99,7 @@ mongodb://127.0.0.1:27017/documents-api
 ##### No local MongoDB server installed?
 
 You can download the MongoDB Community Server from the MongoDB download page. The download is a zip file. Unzip the contents, change the folder name to “mongodb”, and move it to your users home directory. From there, create a “mongodb-data” directory in your user directory to store the database data.
+
 You can start the server using the following command. Make sure to swap out “/Users/Rasmus/” with the correct path to your users home directory.
 /Users/Rasmus/mongodb/bin/mongod --dbpath=/Users/Rasmus/mongodb-data
 
@@ -103,28 +108,13 @@ Documentation Link: [MongoDB download page](https://www.mongodb.com/download-cen
 #### Change node-port
 
 Default port is 3000.
-To change port go to Config > "dev.env" and change value on "PORT".
+To change port go to Config > "dev.env" or "prod.env" depending on your setup and change value on "PORT".
 
 #### Change Vue-port
 
 Default port is 8080.
 To change port go to ROOT > "vue.config" and change value on "port".
-Go to Config > "dev.env" and change value on "VUE_PORT" to same value to update CORS-settings.
-
-#### Change database-url
-
-Default database-url is a local MongoDB-databse.
-To change to an external database go to Config > "dev.env and change value on MONGODB_URL to:
-
-```bash
-mongodb+srv://rasmus:passwordhiq@cluster0-gcjm4.mongodb.net/document-api?retryWrites=true&w=majority
-```
-
-Local url is:
-
-```bash
-mongodb://127.0.0.1:27017/documents-api
-```
+Go to Config > "dev.env" or "prod.env" depending on your setup and change value on "VUE_PORT" to same value to update CORS-settings.
 
 #### Official Vue configuration reference
 

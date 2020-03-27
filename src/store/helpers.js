@@ -15,12 +15,12 @@ const stringCleanerKeepUpperCase = string => {
   return newString;
 };
 
-const arrayCreator = string => {
+const createArray = string => {
   const arrayOfWords = string.split(" ");
   return arrayOfWords;
 };
 
-const arrayCleaner = array => {
+const sanitizeEmptyValues = array => {
   const cleanArrayOfWords = array.filter(word => word != "");
   return cleanArrayOfWords;
 };
@@ -53,7 +53,7 @@ const wordCounter = array => {
 module.exports = {
   stringCleaner,
   stringCleanerKeepUpperCase,
-  arrayCreator,
-  arrayCleaner,
+  createArray,
+  sanitizeEmptyValues,
   wordCounter
 };

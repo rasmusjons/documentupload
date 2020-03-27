@@ -4,11 +4,11 @@ const upload = multer({
   limits: {
     fileSize: 10000000
   },
-  fileFilter(req, file, cb) {
+  fileFilter(request, file, callback) {
     if (!file.originalname.match(/\.(rtf|txt|md|file)$/)) {
-      return cb(new Error("Please upload a txt"));
+      return callback(new Error("Please upload a txt"));
     }
-    cb(undefined, true);
+    callback(undefined, true);
   }
 });
 

@@ -13,13 +13,17 @@
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
+html {
+  background: rgb(250, 250, 250);
+}
+
 #app {
   text-align: center;
   color: #2c3e50;
   background: rgb(250, 250, 250);
   font-family: "Montserrat", sans-serif, Arial;
   font-display: swap;
-  min-height: 1300px;
+  min-height: 1000px;
   height: 100%;
 }
 
@@ -38,7 +42,7 @@
   color: #6abac9;
 }
 
-/* routering transisiton */
+/* routering transition */
 .fade-enter {
   opacity: 0;
 }

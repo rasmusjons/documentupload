@@ -6,16 +6,16 @@ const upload = require("../middleware/upload");
 router.post(
   "/documents",
   upload.single("document"),
-  async (req, res) => {
+  async (request, resolve) => {
     const document = new Document({
-      file: req.file.buffer
+      file: request.file.buffer
     });
 
     try {
       await document.save();
-      res.status(201).send({ document });
+      resolve.status(201).send({ document });
     } catch (e) {
-      res.status(400).send(e);
+      resolve.status(400).send(e);
     }
   },
   (error, req, res, next) => {
@@ -23,19 +23,19 @@ router.post(
   }
 );
 
-router.get("/documents", async (req, res) => {
+router.get("/documents", async (request, resolve) => {
   try {
     const documentList = await Document.findOne()
       .sort({ field: "asc", _id: -1 })
       .limit(1);
-    res.set("Content-Type", "text/plain");
+    resolve.set("Content-Type", "text/plain");
 
-    let newBuff = Buffer.from(documentList.file);
-    const doc = newBuff.toString("utf8");
+    const buffer = Buffer.from(documentList.file);
+    const doc = buffer.toString("utf8");
 
-    res.status(200).send(doc);
+    resolve.status(200).send(doc);
   } catch (e) {
-    res.status(404).send();
+    throw new Error(e);
   }
 });
 
