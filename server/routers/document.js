@@ -25,11 +25,12 @@ router.post(
 
 router.get("/documents", async (req, res) => {
   try {
-    const documentList = await Document.find({});
-    const lastDocument = documentList[documentList.length - 1];
+    const documentList = await Document.findOne()
+      .sort({ field: "asc", _id: -1 })
+      .limit(1);
     res.set("Content-Type", "text/plain");
 
-    let newBuff = Buffer.from(lastDocument.file);
+    let newBuff = Buffer.from(documentList.file);
     const doc = newBuff.toString("utf8");
 
     res.status(200).send(doc);

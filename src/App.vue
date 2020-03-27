@@ -19,7 +19,7 @@
   background: rgb(250, 250, 250);
   font-family: "Montserrat", sans-serif, Arial;
   font-display: swap;
-  min-height: 1000px;
+  min-height: 1300px;
   height: 100%;
 }
 
