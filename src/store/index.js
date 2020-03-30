@@ -42,6 +42,7 @@ export default new Vuex.Store({
             amount: null
           };
           this.state.text = "File is empty";
+          this.state.fileUploadedStatus = true;
           this.state.emptyFile = true;
           return;
         }
@@ -82,12 +83,10 @@ export default new Vuex.Store({
           this.state.text = this.state.originalText;
 
           words.forEach(word => {
-            this.state.text = {
-              ...this.state.text.replace(
-                new RegExp("\\b" + word + "\\b", "gi"),
-                " foo" + word + "bar "
-              )
-            };
+            this.state.text = this.state.text.replace(
+              new RegExp("\\b" + word + "\\b", "gi"),
+              " foo" + word + "bar "
+            );
           });
         }
       })();

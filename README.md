@@ -27,14 +27,14 @@ npm run prod
 Navigate to app in [browser](http://localhost:3000)
 http://localhost:3000
 
-The app runs on an remote database to ensure a swift installation process. To change to local database, see FAQ below.
+The app runs on a remote database to ensure a swift installation process. To change to local database, see FAQ below.
 
 Enjoy!
 
 ### Ship for production
 
 **WARNING!**
-This is an app written for test purposes. prod.env is not ignored by git. The file handle sensitive information such as password.
+This is an app written for test purposes. prod.env is not ignored by git. The file handles sensitive information such as passwords.
 
 To minimize and compile for production run
 

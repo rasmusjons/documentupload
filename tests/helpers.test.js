@@ -2,8 +2,8 @@
 import {
   stringCleaner,
   stringCleanerKeepUpperCase,
-  arrayCreator,
-  arrayCleaner,
+  createArray,
+  sanitizeEmptyValues,
   wordCounter
 } from "../src/store/helpers";
 
@@ -37,14 +37,14 @@ test("Cleans string from special characters and line breaks but keeps uppercase"
 });
 
 test("Creates array from string", () => {
-  expect(arrayCreator("string")).toStrictEqual(["string"]);
-  expect(arrayCreator("string with multiple words")).toStrictEqual([
+  expect(createArray("string")).toStrictEqual(["string"]);
+  expect(createArray("string with multiple words")).toStrictEqual([
     "string",
     "with",
     "multiple",
     "words"
   ]);
-  expect(arrayCreator(" string  with multiple  words")).toStrictEqual([
+  expect(createArray(" string  with multiple  words")).toStrictEqual([
     "",
     "string",
     "",
@@ -56,8 +56,8 @@ test("Creates array from string", () => {
 });
 
 test("Cleans array from empty strings", () => {
-  expect(arrayCleaner([""])).toStrictEqual([]);
-  expect(arrayCleaner(["", "word", "", "", "word", ""])).toStrictEqual([
+  expect(sanitizeEmptyValues([""])).toStrictEqual([]);
+  expect(sanitizeEmptyValues(["", "word", "", "", "word", ""])).toStrictEqual([
     "word",
     "word"
   ]);

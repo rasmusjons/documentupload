@@ -18,7 +18,7 @@
 
             <h4 v-if="fileUploadedStatus && !emptyFileStatus">
               The most common word is
-              <span class="mostCommon">{{ stats.word[0] }}</span> which occur
+              <span class="mostCommon">{{ stats.word[0] }}</span> which occurs
               <span class="mostCommon">{{ stats.maxCount }}</span> times
             </h4>
           </div>

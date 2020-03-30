@@ -112,9 +112,6 @@ export default {
     async handleFileUpload() {
       this.upload(this.$refs.file.files[0]);
     },
-    // drag() {
-    //   console.log(this.dragging);
-    // },
     async onDrop(event) {
       this.upload(event.dataTransfer.files[0]);
     },
