@@ -73,6 +73,14 @@ to generate the scaffolding for this app.
 - Vue-router 3.1.5
 - Vuex 3.1.2
 
+## Technologies discussion
+
+Regarding MongoDB and Mongoose I had previously worked with MongoDB and Mongoose setting up a local database sending JSON-data. Therefore, one of the reasons was simply that I thought it would be an interesting next step to use MongoDB to store binary data. Furthermore, if I ever wanted to scale up this project and store loads of documents, a NoSQL database is a good choice for storing documents because of the low level of support between objects. The reasons I went with a cloud database is partly because I have not done it before and thought it would be fun to set it up and partly because and wanted to make the installation process as smooth as possible.
+
+Concerning Node and Express, I hade done some previous work with Express and therefore it seemed as a good choice considering the time frame for this project. Express, however, does not support file upload in itself, but Multer happens to be released and maintained by the same team which allows you to add file upload to Express with a couple of lines of code. Therefore I thought Multer was a good choice as well.
+
+Lastly, I chose Vue because I have worked with it before and enjoy it immensely. Once again, not knowing how much time certain aspect of the project would consume, going with Vue felt like a safe choice. With the same reasoning, I picked Bootstrap and Axios. There is nothing wrong with Vue-resource, but that being said I like Axios because it is not specific to Vue. I believe this makes the code perhaps a little bit easier for others to read. And with Bootstrap I know I will get a mobile-friendly app with very few lines of code. The components part of Bootstrap, though always handy, was not the deal breaker in this particular project.
+
 ## Development dependencies
 
 - Nodemon

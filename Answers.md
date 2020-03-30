@@ -8,7 +8,7 @@ The app is divided in two major parts, back-end and a front-end, for an easier o
 
 The back-end part resides in the server folder. The server side is structured with separate routes, models and middleware. This makes the project more manageable and scalable.
 
-The font-end part resides in the src folder. The frontend is structured in views and components. I would say that this makes it easier to grasp what is going on as well as maintain it. Furthermore, state handling is centralized in a store in order to allow for easy communication between components and for future possible scalability. Lastly, routes are broken out from the main.js-file.
+The font-end part resides in the src folder. The front-end is structured in views and components. I would say that this makes it easier to grasp what is going on as well as maintain it. Furthermore, state handling is centralized in a store in order to allow for easy communication between components and for future possible scalability. Lastly, routes are broken out from the main.js-file.
 
 More generally I have tried to keep it simple and not to repeat myself.
 
@@ -18,7 +18,7 @@ Regarding the task at hand, and not features unrelated to the assignment, it wou
 
 Secondly, one could off course aim for a much higher test coverage.
 
-Lastly and more generally, if I had more time I would learn ASP.NET and do the assignment with ASP.NET instead of Node. However, I wanted you to see me at my best, that is why I went with a Node/Express backend.
+Lastly and more generally, if I had more time I would learn ASP.NET and do the assignment with ASP.NET instead of Node. However, I wanted you to see me at my best, that is why I went with a Node/Express back-end.
 
 #### What did you think of this recruitment test?
 
