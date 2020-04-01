@@ -2,6 +2,7 @@ const express = require("express");
 require("./db/mongoose");
 const documentRouter = require("../server/routers/document");
 const history = require("connect-history-api-fallback");
+const path = require("path");
 
 const app = express();
 const port = process.env.PORT;
@@ -17,6 +18,9 @@ app.use(
   })
 );
 app.use(staticFileMiddleware);
+app.get("/", function(req, res) {
+  res.render(path.join(__dirname + "/index.html"));
+});
 
 app.use(function(request, response, next) {
   response.header("Access-Control-Allow-Origin", process.env.VUE_PORT);
