@@ -43,13 +43,19 @@
                     class="supportedFormats"
                     v-for="format in supportedFormats"
                     :key="format.index"
-                  >{{ format }} {{ " " }}</p>
+                  >
+                    {{ format }} {{ " " }}
+                  </p>
                 </div>
               </transition>
 
               <!-- Loader. Displayed while loading -->
               <div class="spinner">
-                <b-spinner type="grow" label="Loading..." v-if="spinner"></b-spinner>
+                <b-spinner
+                  type="grow"
+                  label="Loading..."
+                  v-if="spinner"
+                ></b-spinner>
               </div>
             </label>
           </div>
@@ -85,15 +91,11 @@ export default {
       formData.append("document", this.file);
 
       try {
-        const response = await axios.post(
-          "http://localhost:3000/documents",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data"
-            }
+        const response = await axios.post("/documents", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
           }
-        );
+        });
         this.fail = false;
         this.headline = false;
         this.spinner = false;

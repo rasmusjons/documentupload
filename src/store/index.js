@@ -27,7 +27,7 @@ export default new Vuex.Store({
     async GET_DOCUMENT() {
       this.state.spinner = true;
       try {
-        const response = await axios.get("http://localhost:3000/documents");
+        const response = await axios.get("/documents");
         this.state.originalText = response.data;
         this.state.responseString = response.data;
 
