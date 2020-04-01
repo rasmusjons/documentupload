@@ -4,7 +4,7 @@
   "engines": {
     "node": "13.5.x"
   },
-    "scripts": {
+  "scripts": {
     "serve": "vue-cli-service serve",
     "dev": "env-cmd -f ./config/dev.env nodemon server/index.js",
     "prod": "env-cmd -f ./config/prod.env nodemon server/index.js",
@@ -12,12 +12,13 @@
     "test": "jest",
     "lint": "vue-cli-service lint",
     "start": "node server/index.js",
-
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.7.0",
+    "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.4",
     "express": "^4.17.1",
     "mongodb": "^3.5.5",
