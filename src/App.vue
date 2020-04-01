@@ -11,7 +11,7 @@
 </template>
 
 <style>
-/* @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap"); */
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
 html {
   background: rgb(250, 250, 250);
@@ -21,7 +21,7 @@ html {
   text-align: center;
   color: #2c3e50;
   background: rgb(250, 250, 250);
-  font-family: sans-serif, Arial;
+  font-family: "Montserrat", sans-serif, Arial;
   font-display: swap;
   min-height: 1000px;
   height: 100%;
