@@ -8,13 +8,14 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
+const staticFileMiddleware = express.static(__dirname);
+app.use(staticFileMiddleware);
 app.use(
   history({
     disableDotRule: true,
     verbose: true
   })
 );
-const staticFileMiddleware = express.static(__dirname);
 app.use(staticFileMiddleware);
 
 app.use(function(request, response, next) {
