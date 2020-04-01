@@ -10,8 +10,7 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "start": "node server/index.js",
-    "build": "vue-cli-service build"
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
