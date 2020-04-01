@@ -1,4 +1,4 @@
-# HIQ take-home test
+# File Upload
 
 ## An app which lets you upload text-files and returns the most frequent word.
 
@@ -32,9 +32,6 @@ The app runs on a remote database to ensure a swift installation process. To cha
 Enjoy!
 
 ### Ship for production
-
-**WARNING!**
-This is an app written for test purposes. prod.env is not ignored by git. The file handles sensitive information such as passwords.
 
 To minimize and compile for production run
 
