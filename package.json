@@ -1,5 +1,5 @@
 {
-  "name": "Document upload",
+  "name": "documentupload",
   "version": "0.1.0",
   "engines": {
     "node": "13.5.x"
