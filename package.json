@@ -11,8 +11,8 @@
     "build": "vue-cli-service build",
     "test": "jest",
     "lint": "vue-cli-service lint",
-    "start": "node server/index.js"
-
+    "start": "node server/index.js",
+    "postinstall": "npm run build"
 
   },
   "dependencies": {
