@@ -2,7 +2,7 @@
   "name": "hiq",
   "version": "0.1.0",
   "engines": {
-    "node": "13.0.5.0"
+    "node": "13.0.5.x"
   },
   "private": true,
   "scripts": {
