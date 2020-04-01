@@ -1,9 +1,13 @@
-// Imports.
 const express = require("express");
 require("./db/mongoose");
+const documentRouter = require("../server/routers/document");
 const history = require("connect-history-api-fallback");
+
 const app = express();
-// Express server.
+const port = process.env.PORT;
+
+app.use(express.json());
+
 const staticFileMiddleware = express.static(__dirname);
 app.use(staticFileMiddleware);
 app.use(
@@ -13,9 +17,20 @@ app.use(
   })
 );
 app.use(staticFileMiddleware);
-const port = process.env.PORT || 5000;
+
+app.use(function(request, response, next) {
+  response.header("Access-Control-Allow-Origin", process.env.VUE_PORT);
+  response.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  response.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+
+  next();
+});
+
 app.use(documentRouter);
 
 app.listen(port, () => {
-  console.log("App listening on port " + port);
+  console.log("Server is up on port " + port);
 });
