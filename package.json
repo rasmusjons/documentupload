@@ -1,47 +1,25 @@
 {
   "name": "documentupload",
   "version": "1.0.0",
-  "engines": {
-    "node": "13.5.0"
+  "description": "## An app which lets you upload text-files and returns the most frequent word.",
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "tests"
+    
   },
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
-    "start": "node server/index.js",
-    "serve": "vue-cli-service serve",
-    "dev": "env-cmd -f ./config/dev.env nodemon server/index.js",
-    "prod": "env-cmd -f ./config/prod.env nodemon server/index.js",
-    "build": "vue-cli-service build",
-    "test": "jest",
-    "lint": "vue-cli-service lint"
+    "start": "node server/index.js"
   },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "bootstrap": "^4.4.1",
-    "bootstrap-vue": "^2.7.0",
-    "core-js": "^3.6.4",
-    "express": "^4.17.1",
-    "mongodb": "^3.5.5",
-    "mongoose": "^5.9.4",
-    "multer": "^1.4.2",
-    "vue": "^2.6.11",
-    "vue-router": "^3.1.5",
-    "vuex": "^3.1.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rasmusjons/documentupload.git"
   },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.2.0",
-    "@vue/cli-plugin-eslint": "^4.2.0",
-    "@vue/cli-plugin-router": "^4.2.0",
-    "@vue/cli-plugin-vuex": "^4.2.0",
-    "@vue/cli-service": "^4.2.0",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "@vue/test-utils": "1.0.0-beta.31",
-    "babel-eslint": "^10.0.3",
-    "env-cmd": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^6.1.2",
-    "jest": "^25.1.0",
-    "nodemon": "^2.0.2",
-    "prettier": "^1.19.1",
-    "vue-template-compiler": "^2.6.11"
-  }
+  "author": "Rasmus Jonsson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rasmusjons/documentupload/issues"
+  },
+  "homepage": "https://github.com/rasmusjons/documentupload#readme"
 }
