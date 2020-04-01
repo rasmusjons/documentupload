@@ -1,6 +1,9 @@
 {
   "name": "documentupload",
   "version": "1.0.0",
+  "engines": {
+    "node": "13.5.0"
+  },
   "scripts": {
     "start": "node server/index.js",
     "serve": "vue-cli-service serve",
