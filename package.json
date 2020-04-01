@@ -8,10 +8,10 @@
     "serve": "vue-cli-service serve",
     "dev": "env-cmd -f ./config/dev.env nodemon server/index.js",
     "prod": "env-cmd -f ./config/prod.env nodemon server/index.js",
-    "build": "vue-cli-service build",
     "test": "jest",
     "lint": "vue-cli-service lint",
-    "start": "node server/index.js"
+    "start": "npm run dev",
+    "build": "node server/index.js"
   },
   "dependencies": {
     "axios": "^0.19.2",

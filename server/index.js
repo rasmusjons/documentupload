@@ -8,7 +8,7 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
-const staticFileMiddleware = express.static(__dirname);
+const staticFileMiddleware = express.static(__dirname + "/dist");
 app.use(staticFileMiddleware);
 app.use(
   history({
