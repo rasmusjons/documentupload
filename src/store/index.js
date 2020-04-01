@@ -104,7 +104,6 @@ export default new Vuex.Store({
       commit("GET_DOCUMENT");
     },
     toggleCase: ({ commit }) => {
-      console.log("action");
       commit("TOGGLE_CASE");
     }
   },
