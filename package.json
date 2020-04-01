@@ -1,8 +1,10 @@
 {
-  "name": "hiq",
+  "name": "Document upload",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
+  "engines": {
+    "node": "13.5.x"
+  },
+    "scripts": {
     "serve": "vue-cli-service serve",
     "dev": "env-cmd -f ./config/dev.env nodemon server/index.js",
     "prod": "env-cmd -f ./config/prod.env nodemon server/index.js",
