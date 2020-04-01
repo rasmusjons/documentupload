@@ -1,5 +1,6 @@
 require("./db/mongoose");
 const documentRouter = require("../server/routers/document");
+const path = require("path");
 const serveStatic = require("serve-static");
 
 // Imports.
@@ -7,7 +8,7 @@ const express = require("express");
 const history = require("connect-history-api-fallback");
 const app = express();
 // Express server.
-app.use(serveStatic(__dirname + "/dist"));
+app.use(serveStatic(path.join(__dirname, "../dist")));
 
 app.use(
   history({
