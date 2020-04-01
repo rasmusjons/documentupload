@@ -15,7 +15,12 @@ app.use(
   })
 );
 app.use(staticFileMiddleware);
-// app.use(documentRouter);
+
+app.get("/", function(request, response) {
+  response.send("Hello World!");
+});
+
+app.use(documentRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
