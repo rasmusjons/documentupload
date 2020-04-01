@@ -7,12 +7,15 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
+
 app.use(
   history({
     disableDotRule: true,
     verbose: true
   })
 );
+const staticFileMiddleware = express.static(__dirname);
+app.use(staticFileMiddleware);
 
 app.use(function(request, response, next) {
   response.header("Access-Control-Allow-Origin", process.env.VUE_PORT);
