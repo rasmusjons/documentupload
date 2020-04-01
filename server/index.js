@@ -6,7 +6,7 @@ const express = require("express");
 const history = require("connect-history-api-fallback");
 const app = express();
 // Express server.
-const staticFileMiddleware = express.static(__dirname);
+const staticFileMiddleware = express.static(__dirname + "/dist");
 app.use(staticFileMiddleware);
 app.use(
   history({
