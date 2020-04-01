@@ -1,38 +1,13 @@
 const express = require("express");
 require("./db/mongoose");
 const documentRouter = require("../server/routers/document");
-const history = require("connect-history-api-fallback");
+const serveStatic = require("serve-static");
 const path = require("path");
 
 const app = express();
+app.use(serveStatic(path.join(__dirname, "dist")));
+
 const port = process.env.PORT;
-
-app.use(express.json());
-
-const staticFileMiddleware = express.static(__dirname, "/dist");
-app.use(staticFileMiddleware);
-app.use(
-  history({
-    disableDotRule: true,
-    verbose: true
-  })
-);
-app.use(staticFileMiddleware);
-
-app.get(/.*/, function(req, res) {
-  res.sendFile(path.join(__dirname, "/dist/index.html"));
-});
-
-app.use(function(request, response, next) {
-  response.header("Access-Control-Allow-Origin", process.env.VUE_PORT);
-  response.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  response.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-
-  next();
-});
 
 app.use(documentRouter);
 
