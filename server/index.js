@@ -1,11 +1,18 @@
 const express = require("express");
 require("./db/mongoose");
 const documentRouter = require("../server/routers/document");
+const history = require("connect-history-api-fallback");
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
+app.use(
+  history({
+    disableDotRule: true,
+    verbose: true
+  })
+);
 
 app.use(function(request, response, next) {
   response.header("Access-Control-Allow-Origin", process.env.VUE_PORT);
