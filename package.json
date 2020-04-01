@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "node server/index.js",
     "serve": "vue-cli-service serve",
     "dev": "env-cmd -f ./config/dev.env nodemon server/index.js",
     "prod": "env-cmd -f ./config/prod.env nodemon server/index.js",
